@@ -53,7 +53,7 @@ static void gatts_profile_b_event_handler(esp_gatts_cb_event_t event, esp_gatt_i
 
 #define GATTS_DEMO_CHAR_VAL_LEN_MAX		0x40
 
-uint8_t char1_str[] = {0x11,0x22,0x33};
+uint8_t char1_str[] = {0x0};
 esp_attr_value_t gatts_demo_char1_val = 
 {
 	.attr_max_len = GATTS_DEMO_CHAR_VAL_LEN_MAX,
@@ -386,6 +386,10 @@ static void gatts_event_handler(esp_gatts_cb_event_t event, esp_gatt_if_t gatts_
 
 #define DUMP_VAR_I(x) \
  printf("%s:%d:%s=<%d>",__FILE__,__LINE__,#x,x)
+
+void ble_server_notify(char sign){
+	char1_str[0] = sign;
+}
 
 void ble_server_app_main()
 {
