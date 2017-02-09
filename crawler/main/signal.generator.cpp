@@ -29,7 +29,7 @@ static const double pi = std::acos(-1);
 
 static char signal(int counter)
 {
-   double x = 2 * pi * (double)counter/(double)50;
+   double x = 2 * pi * (double)counter/(double)iConstSampleRate;
    double y = sin(x);
    DUMP_VAR_d(counter);
    DUMP_VAR_f(x);
