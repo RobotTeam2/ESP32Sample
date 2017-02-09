@@ -384,6 +384,9 @@ static void gatts_event_handler(esp_gatts_cb_event_t event, esp_gatt_if_t gatts_
     } while (0);
 }
 
+#define DUMP_VAR_I(x) \
+ printf("%s:%d:%s=<%d>",__FILE__,__LINE__,#x,x)
+
 void app_ble_server_main()
 {
     esp_err_t ret;
@@ -395,11 +398,13 @@ void app_ble_server_main()
         ESP_LOGE(GATTS_TAG, "%s init bluetooth failed\n", __func__);
         return;
     }
+    DUMP_VAR_I(ret);
     ret = esp_bluedroid_enable();
     if (ret) {
         ESP_LOGE(GATTS_TAG, "%s enable bluetooth failed\n", __func__);
         return;
     }
+    DUMP_VAR_I(ret);
 
     esp_ble_gatts_register_callback(gatts_event_handler);
     esp_ble_gap_register_callback(gap_event_handler);
