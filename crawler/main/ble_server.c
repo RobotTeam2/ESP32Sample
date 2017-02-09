@@ -387,7 +387,7 @@ static void gatts_event_handler(esp_gatts_cb_event_t event, esp_gatt_if_t gatts_
 #define DUMP_VAR_I(x) \
  printf("%s:%d:%s=<%d>",__FILE__,__LINE__,#x,x)
 
-void app_ble_server_main()
+void ble_server_app_main()
 {
     esp_err_t ret;
 
