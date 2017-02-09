@@ -34,7 +34,7 @@ static char signal(int counter)
    DUMP_VAR_d(counter);
    DUMP_VAR_f(x);
    DUMP_VAR_f(y);
-   return y *127;
+   return y *126;
 }
 
 static int gSamplerCounter = 0;
