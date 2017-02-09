@@ -33,3 +33,4 @@
 *.su
 esp-idf
 build
+sdkconfig.old
