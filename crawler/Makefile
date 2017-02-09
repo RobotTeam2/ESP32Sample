@@ -3,7 +3,7 @@
 # project subdirectory.
 #
 
-PROJECT_NAME := LuaNode
+PROJECT_NAME := esp32.crawler
 
 include $(IDF_PATH)/make/project.mk
 
