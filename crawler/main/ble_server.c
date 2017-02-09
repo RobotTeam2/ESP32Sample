@@ -54,7 +54,7 @@ static void gatts_profile_b_event_handler(esp_gatts_cb_event_t event, esp_gatt_i
 #define GATTS_DEMO_CHAR_VAL_LEN_MAX		0x40
 
 uint8_t char1_str[] = {0x0};
-static char gSignalBuff = 0;
+static char gSignalBuff = 23;
 
 esp_attr_value_t gatts_demo_char1_val = 
 {
