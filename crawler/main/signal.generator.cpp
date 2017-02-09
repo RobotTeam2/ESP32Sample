@@ -43,5 +43,5 @@ void signal_generator_task(void *pvParameter)
 
 extern "C" void signal_generator_app_main()
 {
-    xTaskCreate(&signal_generator_task, "signal_generator_task", 512, NULL, 5, NULL);
+    xTaskCreate(&signal_generator_task, "signal_generator_task", 1024, NULL, 5, NULL);
 }
