@@ -23,6 +23,5 @@ void signal_generator_task(void *pvParameter)
 
 void signal_generator_app_main()
 {
-    nvs_flash_init();
     xTaskCreate(&signal_generator_task, "signal_generator_task", 512, NULL, 5, NULL);
 }
