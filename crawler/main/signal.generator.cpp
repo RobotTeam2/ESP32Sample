@@ -14,8 +14,13 @@
 #include <cmath>
 
 #define ms(x) (x/portTICK_PERIOD_MS)
+
+#define DUMP_VAR_d(x) \
+ printf("%s:%d:%s=<%d>\n",__FILE__,__LINE__,#x,x)
+
 #define DUMP_VAR_f(x) \
- printf("%s:%d:%s=<%f>",__FILE__,__LINE__,#x,x)
+ printf("%s:%d:%s=<%f>\n",__FILE__,__LINE__,#x,x)
+
 
 
 static const int iConstSampleRate = 10;
@@ -26,6 +31,7 @@ static char signal(int counter)
 {
    double x = 2 * pi * (double)counter/(double)50;
    double y = sin(x);
+   DUMP_VAR_d(x);
    DUMP_VAR_f(x);
    DUMP_VAR_f(y);
    return y *127;
@@ -43,5 +49,5 @@ void signal_generator_task(void *pvParameter)
 
 extern "C" void signal_generator_app_main()
 {
-    xTaskCreate(&signal_generator_task, "signal_generator_task", 1024, NULL, 5, NULL);
+    xTaskCreate(&signal_generator_task, "signal_generator_task", 2048, NULL, 5, NULL);
 }
