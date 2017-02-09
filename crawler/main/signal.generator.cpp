@@ -11,13 +11,33 @@
 #include "freertos/task.h"
 #include "esp_system.h"
 #include "sdkconfig.h"
+#include <cmath>
+
+#define ms(x) (x/portTICK_PERIOD_MS)
+#define DUMP_VAR_f(x) \
+ printf("%s:%d:%s=<%f>",__FILE__,__LINE__,#x,x)
 
 
+static const int iConstSampleRate = 50;
+static const int iConstSampleDelay = 1000/iConstSampleRate;
+static const double pi = std::acos(-1);
+
+static char signal(int counter)
+{
+   double x = 2 pi * (double)counter/(double)50;
+   double y = sin(x);
+   DUMP_VAR_f(x);
+   DUMP_VAR_f(y);
+   return y *127;
+}
+
+static int gSamplerCounter = 0;
 
 void signal_generator_task(void *pvParameter)
 {
-    while(1) {
-        vTaskDelay(1000 / portTICK_PERIOD_MS);
+    while(true) {
+       auto sign = signal(gSamplerCounter++%iConstSampleRate);
+       vTaskDelay(ms(iConstSampleDelay));
     }
 }
 
