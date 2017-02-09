@@ -31,7 +31,7 @@ static char signal(int counter)
 {
    double x = 2 * pi * (double)counter/(double)50;
    double y = sin(x);
-   DUMP_VAR_d(x);
+   DUMP_VAR_d(counter);
    DUMP_VAR_f(x);
    DUMP_VAR_f(y);
    return y *127;
