@@ -23,7 +23,7 @@
 
 
 
-static const int iConstSampleRate = 10;
+static const int iConstSampleRate = 100;
 static const int iConstSampleDelay = 1000/iConstSampleRate;
 static const double pi = std::acos(-1);
 
