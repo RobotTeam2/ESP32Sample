@@ -412,7 +412,7 @@ void app_ble_server_main()
     DUMP_VAR_I(ret);
     esp_ble_gatts_app_register(PROFILE_A_APP_ID);
     DUMP_VAR_I(ret);
-    esp_ble_gatts_app_register(PROFILE_B_APP_ID);    
+    //esp_ble_gatts_app_register(PROFILE_B_APP_ID);    
     DUMP_VAR_I(ret);
     return;
 }
