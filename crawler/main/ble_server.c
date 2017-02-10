@@ -388,7 +388,7 @@ void ble_server_notify(char sign){
   gSignalBuff[0] = sign;
 }
 
-void ble_server_app_main()
+void ble_server_task()
 {
     esp_err_t ret;
 
@@ -415,5 +415,12 @@ void ble_server_app_main()
     DUMP_VAR_I(ret);
     esp_ble_gatts_app_register(PROFILE_B_APP_ID);    
     DUMP_VAR_I(ret);
+    while(true) {
+       
+    }
     return;
+}
+
+void ble_server_app_main(){
+    xTaskCreate(&ble_server_task, "ble_server_task", 2048, NULL, 5, NULL);
 }
