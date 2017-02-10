@@ -416,7 +416,8 @@ void ble_server_task()
     esp_ble_gatts_app_register(PROFILE_B_APP_ID);    
     DUMP_VAR_I(ret);
     while(true) {
-       
+       const portTickType xDelay = 10 / portTICK_RATE_MS;
+       vTaskDelay(xDelay);
     }
     return;
 }
