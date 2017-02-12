@@ -22,7 +22,7 @@
 #define DUMP_VAR_f(x) \
  printf("%s:%d:%s=<%f>\n",__FILE__,__LINE__,#x,x)
 
-extern "C" ble_server_notify(char);
+extern "C" void ble_server_notify(char);
 
 static const int iConstSampleRate = 100;
 static const int iConstSampleDelay = 1000/iConstSampleRate;
