@@ -386,6 +386,7 @@ static void gatts_event_handler(esp_gatts_cb_event_t event, esp_gatt_if_t gatts_
 
 void ble_server_notify(char sign){
   gSignalBuff[0] = sign;
+  char1_str[0] = sign;
 }
 
 void ble_server_task()
