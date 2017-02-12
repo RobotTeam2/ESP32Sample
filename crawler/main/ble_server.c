@@ -423,5 +423,5 @@ void ble_server_task()
 }
 
 void ble_server_app_main(){
-    xTaskCreate(&ble_server_task, "ble_server_task", 2048, NULL, 5, NULL);
+    xTaskCreate(&ble_server_task, "ble_server_task", 4096, NULL, 5, NULL);
 }
