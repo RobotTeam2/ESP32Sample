@@ -1,0 +1,95 @@
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>クローラ</title>
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>  
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+  </head>
+  <body>
+    <div class="container" style="height:10%;"></div>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-4 col-lg-offset-4">
+          <form>
+            <div class="form-group">
+              <label for="esp-ip-address">ESPボードのIPアドレスを入れてください:</label>
+              <input type="text" class="form-control input-lg" size="30" maxlength="20" id="esp-ip-address" value="127.0.0.1" ></input>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    <hr/>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-1 col-lg-offset-5">
+          <button type="button" class="btn btn-lg btn-block btn-primary" onclick="forward()"><i class="glyphicon glyphicon glyphicon-forward"></i></button>
+        </div>
+      </div>
+    </div>
+    <div class="container" style="height:5%;"></div>
+    <hr/>
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-1 col-sm-offset-5">
+          <button type="button" class="btn btn-lg btn-block btn-success" onclick="up()"><i class="glyphicon glyphicon-circle-arrow-up"></i></button>
+        </div>
+      </div>
+      <div class="row" style="height:2%;"></div>
+      <div class="row">
+        <div class="col-sm-1 col-sm-offset-4">
+          <button type="button" class="btn btn-lg btn-block btn-success" onclick="left()"><i class="glyphicon glyphicon-circle-arrow-left"></i></button>
+        </div>
+        <div class="col-sm-1">
+          <button type="button" class="btn btn-lg btn-block btn-danger" onclick="stop()"><i class="glyphicon glyphicon-stop"></i></button>
+        </div>
+        <div class="col-sm-1">
+          <button type="button" class="btn btn-lg btn-block btn-success" onclick="right()"><i class="glyphicon glyphicon-circle-arrow-right"></i></button>
+        </div>
+      </div>
+      <div class="row" style="height:2%;"></div>
+      <div class="row">
+        <div class="col-sm-1 col-sm-offset-5">
+          <button type="button" class="btn btn-lg btn-block btn-success" onclick="down()"><i class="glyphicon glyphicon-circle-arrow-down"></i></button>
+        </div>
+      </div>
+    </div>
+    <script>
+      function esp() {
+        return $('#esp-ip-address').val();
+      }
+      function onESPResult(res){
+        console.log('res=<',res,'>');
+      }
+      function espRequest(path) {
+        let ip = esp();
+        console.log('ip=<',ip,'>');
+        $.get('http://' + ip + path,{},onESPResult);
+      }
+      function up() {
+        espRequest('/gpio/30/');
+      }
+      function left() {
+        espRequest('/gpio/120/');
+      }
+      function right() {
+        espRequest('/gpio/90/');
+      }
+      function down() {
+        espRequest('/gpio/60/');
+      }
+
+      function stop() {
+        espRequest('/gpio/0/');
+      }
+      function forward() {
+        espRequest('/gpio/150/');
+      }
+    </script>
+  </body>
+</html>
