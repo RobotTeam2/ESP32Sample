@@ -94,18 +94,34 @@
     <script>
       $(document).ready(function(){
         let mediaConstraints = {optional: [{RtpDataChannels: true}]};
-        let servers = {iceServers: [{urls: "stun:stun.services.mozilla.com"}]};
+        let servers = {iceServers: [{urls: "stun:stun.l.google.com:19302"}]};
         let pc = new RTCPeerConnection(servers, mediaConstraints);
         pc.onicecandidate = function(ice){
-          console.log('ice=<',ice,'>');
+          //console.log('ice=<',ice,'>');
+          if(ice.candidate) {
+            //console.log('ice.candidate=<',ice.candidate,'>');
+            handleCandidate(ice.candidate.candidate);
+          }
         };
-        pc.createDataChannel("");
+        pc.createDataChannel("crawler");
         pc.createOffer(function(result){
-          console.log('result=<',result,'>');
+          //console.log('result=<',result,'>');
           pc.setLocalDescription(result, function(){}, function(){});
+        },function(e){
+          console.error('e=<',e,'>');
         });
-        console.log('pc=<',pc,'>');
+        //console.log('pc=<',pc,'>');
       });
+      function handleCandidate(candidate){
+        console.log('candidate=<',candidate,'>');
+        let ip_regex = /([0-9]{1,3}(\.[0-9]{1,3}){3}|[a-f0-9]{1,4}(:[a-f0-9]{1,4}){7})/;
+        let ip_addr_splite = ip_regex.exec(candidate);
+        console.log('ip_addr_splite=<',ip_addr_splite,'>');
+        if(ip_addr_splite) {
+          let ip_addr = ip_addr_splite[1];
+          console.log('ip_addr=<',ip_addr,'>');
+        }
+      }
     </script>
   </body>
 </html>
