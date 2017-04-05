@@ -2,19 +2,15 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <title>クローラ</title>
-    <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>  
-    <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-    <!-- Optional theme -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
-    <!-- Latest compiled and minified JavaScript -->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="bower_components/tether/dist/css/tether.min.css">
+    <link rel="stylesheet" href="iconfont.css">
   </head>
   <body>
     <div class="container" style="height:10%;"></div>
     <div class="container">
       <div class="row">
-        <div class="col-lg-4 col-lg-offset-4">
+        <div class="col-lg-4 offset-lg-4">
           <form>
             <div class="form-group">
               <label for="esp-ip-address">ESPボードのIPアドレスを入れてください:</label>
@@ -27,8 +23,8 @@
     <hr/>
     <div class="container">
       <div class="row">
-        <div class="col-lg-1 col-lg-offset-5">
-          <button type="button" class="btn btn-lg btn-block btn-primary" onclick="forward()"><i class="glyphicon glyphicon glyphicon-forward"></i></button>
+        <div class="col-lg-1 offset-lg-5">
+          <button type="button" class="btn btn-lg btn-block btn-primary" onclick="forward()"><i class="material-icons">fast_forward</i></button>
         </div>
       </div>
     </div>
@@ -36,29 +32,32 @@
     <hr/>
     <div class="container">
       <div class="row">
-        <div class="col-sm-1 col-sm-offset-5">
-          <button type="button" class="btn btn-lg btn-block btn-success" onclick="up()"><i class="glyphicon glyphicon-circle-arrow-up"></i></button>
+        <div class="col-sm-1 offset-sm-5">
+          <button type="button" class="btn btn-lg btn-block btn-success" onclick="up()"><i class="material-icons">keyboard_arrow_up</i></button>
         </div>
       </div>
       <div class="row" style="height:2%;"></div>
       <div class="row">
-        <div class="col-sm-1 col-sm-offset-4">
-          <button type="button" class="btn btn-lg btn-block btn-success" onclick="left()"><i class="glyphicon glyphicon-circle-arrow-left"></i></button>
+        <div class="col-sm-1 offset-sm-4">
+          <button type="button" class="btn btn-lg btn-block btn-success" onclick="left()"><i class="material-icons">keyboard_arrow_left</i></button>
         </div>
         <div class="col-sm-1">
-          <button type="button" class="btn btn-lg btn-block btn-danger" onclick="stop()"><i class="glyphicon glyphicon-stop"></i></button>
+          <button type="button" class="btn btn-lg btn-block btn-danger" onclick="stop()"><i class="material-icons">stop</i></button>
         </div>
         <div class="col-sm-1">
-          <button type="button" class="btn btn-lg btn-block btn-success" onclick="right()"><i class="glyphicon glyphicon-circle-arrow-right"></i></button>
+          <button type="button" class="btn btn-lg btn-block btn-success" onclick="right()"><i class="material-icons">keyboard_arrow_right</i></button>
         </div>
       </div>
       <div class="row" style="height:2%;"></div>
       <div class="row">
-        <div class="col-sm-1 col-sm-offset-5">
-          <button type="button" class="btn btn-lg btn-block btn-success" onclick="down()"><i class="glyphicon glyphicon-circle-arrow-down"></i></button>
+        <div class="col-sm-1 offset-sm-5">
+          <button type="button" class="btn btn-lg btn-block btn-success" onclick="down()"><i class="material-icons">keyboard_arrow_down</i></button>
         </div>
       </div>
     </div>
+    <script src="bower_components/jquery/dist/jquery.min.js"></script>  
+    <script src="bower_components/tether/dist/js/tether.min.js"></script>
+    <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
     <script>
       function esp() {
         return $('#esp-ip-address').val();
