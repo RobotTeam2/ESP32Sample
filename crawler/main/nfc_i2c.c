@@ -11,6 +11,7 @@
 #include "soc/uart_struct.h"
 
 
+static const char *TAG = "uart_example";
 
 void uart_evt_nfc()
 {
