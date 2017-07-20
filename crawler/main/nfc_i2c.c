@@ -13,6 +13,9 @@
 
 static const char *TAG = "uart_example";
 
+#define BUF_SIZE (1024)
+QueueHandle_t uart0_queue;
+
 void uart_evt_nfc()
 {
     int uart_num = UART_NUM_0;
