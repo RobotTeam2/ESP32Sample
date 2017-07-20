@@ -99,7 +99,7 @@ void uart_evt_nfc()
 {
     int uart_num = UART_NUM_2;
     uart_config_t uart_config = {
-       .baud_rate = 115200,
+       .baud_rate = 9600,
        .data_bits = UART_DATA_8_BITS,
        .parity = UART_PARITY_DISABLE,
        .stop_bits = UART_STOP_BITS_1,
@@ -121,12 +121,10 @@ void uart_evt_nfc()
     xTaskCreate(uart_task, "uart_task", 2048, (void*)uart_num, 12, NULL);
     //process data
     uint8_t* data = (uint8_t*) malloc(BUF_SIZE);
+    data[0] = COMMAND_WAIT;
     do {
-        int len = uart_read_bytes(uart_num, data, BUF_SIZE, 100 / portTICK_RATE_MS);
-        if(len > 0) {
-            ESP_LOGI(TAG, "uart read : %d", len);
-            uart_write_bytes(uart_num, (const char*)data, len);
-        }
+       ESP_LOGI(TAG, "uart write wait : %d", len);
+       uart_write_bytes(uart_num, (const char*)data, 1);
     } while(1);
 }
 
