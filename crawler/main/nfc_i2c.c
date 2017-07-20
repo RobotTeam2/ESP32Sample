@@ -14,7 +14,6 @@
 static const char *TAG = "uart_example";
 
 #define BUF_SIZE (1024)
-QueueHandle_t uart0_queue;
 
 
 //------------------MFRC522 register ---------------
@@ -30,6 +29,7 @@ QueueHandle_t uart0_queue;
 #define         MIFARE_KEYB         0x01
 
 
+QueueHandle_t uart2_queue;
 
 
 void uart_task(void *pvParameters)
@@ -40,7 +40,7 @@ void uart_task(void *pvParameters)
     uint8_t* dtmp = (uint8_t*) malloc(BUF_SIZE);
     for(;;) {
         //Waiting for UART event.
-        if(xQueueReceive(uart0_queue, (void * )&event, (portTickType)portMAX_DELAY)) {
+        if(xQueueReceive(uart2_queue, (void * )&event, (portTickType)portMAX_DELAY)) {
             ESP_LOGI(TAG, "uart[%d] event:", uart_num);
             switch(event.type) {
                 //Event of UART receving data
@@ -97,7 +97,7 @@ void uart_task(void *pvParameters)
 
 void uart_evt_nfc()
 {
-    int uart_num = UART_NUM_0;
+    int uart_num = UART_NUM_2;
     uart_config_t uart_config = {
        .baud_rate = 115200,
        .data_bits = UART_DATA_8_BITS,
@@ -111,7 +111,7 @@ void uart_evt_nfc()
     //Set UART log level
     esp_log_level_set(TAG, ESP_LOG_INFO);
     //Install UART driver, and get the queue.
-    uart_driver_install(uart_num, BUF_SIZE * 2, BUF_SIZE * 2, 10, &uart0_queue, 0);
+    uart_driver_install(uart_num, BUF_SIZE * 2, BUF_SIZE * 2, 10, &uart2_queue, 0);
     //Set UART pins,(-1: default pin, no change.)
     //For UART0, we can just use the default pins.
     //uart_set_pin(uart_num, UART_PIN_NO_CHANGE, UART_PIN_NO_CHANGE, UART_PIN_NO_CHANGE, UART_PIN_NO_CHANGE);
