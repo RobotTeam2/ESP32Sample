@@ -41,7 +41,7 @@ void uart_task(void *pvParameters)
     for(;;) {
         //Waiting for UART event.
         if(xQueueReceive(uart2_queue, (void * )&event, (portTickType)portMAX_DELAY)) {
-            ESP_LOGI(TAG, "uart[%d] event:", uart_num);
+            printf("uart[%d] event:", uart_num);
             switch(event.type) {
                 //Event of UART receving data
                 /*We'd better handler data event fast, there would be much more data events than
@@ -111,10 +111,11 @@ void uart_evt_nfc()
     //Set UART log level
     esp_log_level_set(TAG, ESP_LOG_INFO);
     //Install UART driver, and get the queue.
-    uart_driver_install(uart_num, BUF_SIZE * 2, BUF_SIZE * 2, 10, &uart2_queue, 0);
+    esp_err_t installed =  uart_driver_install(uart_num, BUF_SIZE * 2, BUF_SIZE * 2, 10, &uart2_queue, 0);
+    printf("installed : %d\n", installed);
     //Set UART pins,(-1: default pin, no change.)
-    //For UART0, we can just use the default pins.
-    //uart_set_pin(uart_num, UART_PIN_NO_CHANGE, UART_PIN_NO_CHANGE, UART_PIN_NO_CHANGE, UART_PIN_NO_CHANGE);
+    //For UART2, we can just use the default pins.
+    uart_set_pin(uart_num, UART_PIN_NO_CHANGE, UART_PIN_NO_CHANGE, UART_PIN_NO_CHANGE, UART_PIN_NO_CHANGE);
     //Set uart pattern detect function.
     uart_enable_pattern_det_intr(uart_num, '+', 3, 10000, 10, 10);
     //Create a task to handler UART event from ISR
@@ -123,7 +124,7 @@ void uart_evt_nfc()
     uint8_t* data = (uint8_t*) malloc(BUF_SIZE);
     data[0] = COMMAND_WAIT;
     do {
-       ESP_LOGI(TAG, "uart write wait : %02x", COMMAND_WAIT);
+       printf("uart write wait : %02x\n", COMMAND_WAIT);
        uart_write_bytes(uart_num, (const char*)data, 1);
     } while(1);
 }
