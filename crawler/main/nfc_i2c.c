@@ -16,6 +16,22 @@ static const char *TAG = "uart_example";
 #define BUF_SIZE (1024)
 QueueHandle_t uart0_queue;
 
+
+//------------------MFRC522 register ---------------
+#define         COMMAND_WAIT        0x02
+#define         COMMAND_READBLOCK   0x03
+#define         COMMAND_WRITEBLOCK  0x04
+#define         MFRC522_HEADER      0xAB
+
+#define         STATUS_ERROR        0
+#define         STATUS_OK           1
+
+#define         MIFARE_KEYA         0x00
+#define         MIFARE_KEYB         0x01
+
+
+
+
 void uart_task(void *pvParameters)
 {
     int uart_num = (int) pvParameters;
