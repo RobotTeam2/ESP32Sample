@@ -95,6 +95,8 @@ void uart_task(void *pvParameters)
 }
 
 
+const portTickType xDelay = 500 / portTICK_RATE_MS;
+
 void uart_evt_nfc()
 {
     int uart_num = UART_NUM_2;
@@ -126,6 +128,7 @@ void uart_evt_nfc()
     do {
        printf("uart write wait : %02x\n", COMMAND_WAIT);
        uart_write_bytes(uart_num, (const char*)data, 1);
+       vTaskDelay( xDelay );
     } while(1);
 }
 
