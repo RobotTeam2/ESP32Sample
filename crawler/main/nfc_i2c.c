@@ -123,7 +123,7 @@ void uart_evt_nfc()
     uint8_t* data = (uint8_t*) malloc(BUF_SIZE);
     data[0] = COMMAND_WAIT;
     do {
-       ESP_LOGI(TAG, "uart write wait : %d", len);
+       ESP_LOGI(TAG, "uart write wait : %02x", COMMAND_WAIT);
        uart_write_bytes(uart_num, (const char*)data, 1);
     } while(1);
 }
