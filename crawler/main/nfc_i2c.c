@@ -29,6 +29,13 @@ static const char *TAG = "uart_example";
 #define         MIFARE_KEYB         0x01
 
 
+#define NFC_UART_TXD  (16)
+#define NFC_UART_RXD  (17)
+	
+#define NFC_UART_RTS  (18)
+#define NFC_UART_CTS  (19)
+
+
 QueueHandle_t uart2_queue;
 
 
@@ -112,14 +119,12 @@ void uart_evt_nfc()
     uart_param_config(uart_num, &uart_config);
     //Set UART log level
     esp_log_level_set(TAG, ESP_LOG_INFO);
+    //Set UART pins,(-1: default pin, no change.)
+    //For UART2, we can just use the default pins.
+    uart_set_pin(uart_num, NFC_UART_TXD, NFC_UART_RXD, NFC_UART_RTS, NFC_UART_CTS);
     //Install UART driver, and get the queue.
     esp_err_t installed =  uart_driver_install(uart_num, BUF_SIZE * 2, BUF_SIZE * 2, 10, &uart2_queue, 0);
     printf("installed : %d\n", installed);
-    //Set UART pins,(-1: default pin, no change.)
-    //For UART2, we can just use the default pins.
-    uart_set_pin(uart_num, UART_PIN_NO_CHANGE, UART_PIN_NO_CHANGE, UART_PIN_NO_CHANGE, UART_PIN_NO_CHANGE);
-    //Set uart pattern detect function.
-    uart_enable_pattern_det_intr(uart_num, '+', 3, 10000, 10, 10);
     //Create a task to handler UART event from ISR
     xTaskCreate(uart_task, "uart_task", 2048, (void*)uart_num, 12, NULL);
     //process data
