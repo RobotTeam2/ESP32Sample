@@ -58,6 +58,11 @@ void uart_task(void *pvParameters)
                 case UART_DATA:
                     uart_get_buffered_data_len(uart_num, &buffered_size);
                     ESP_LOGI(TAG, "data, len: %d; buffered len: %d", event.size, buffered_size);
+		    uint8_t *data = (uint8_t *)malloc(len);
+	            TickType_t ticks_to_wait = portTICK_RATE_MS;
+		    len = uart_read_bytes(uart_num,data,len,ticks_to_wait);
+	            ESP_LOGI(TAG, "data=%02x", data[0]);
+		    free(data);
                     break;
                 //Event of HW FIFO overflow detected
                 case UART_FIFO_OVF:
