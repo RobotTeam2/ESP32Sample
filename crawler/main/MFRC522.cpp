@@ -11,6 +11,16 @@
 #include "soc/uart_struct.h"
 
 
+static const char *TAG = "MFRC522";
+
+#define BUF_SIZE (1024)
+
+#define NFC_UART_TXD  (16)
+#define NFC_UART_RXD  (17)
+#define NFC_UART_RTS  (18)
+#define NFC_UART_CTS  (19)
+QueueHandle_t uart2_queue;
+
 #include "MFRC522.h"
 
 //------------------MFRC522 register ---------------
