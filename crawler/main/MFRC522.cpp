@@ -29,7 +29,6 @@
  * Constructor.
  */
 MFRC522::MFRC522() {
-    _Serial = NULL;
 }
 
 /**
