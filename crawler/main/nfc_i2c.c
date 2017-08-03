@@ -135,9 +135,10 @@ void uart_evt_nfc()
     //process data
     uint8_t* data = (uint8_t*) malloc(BUF_SIZE);
     data[0] = COMMAND_WAIT;
+    
+    printf("uart write wait : %02x\n", COMMAND_WAIT);
+    uart_write_bytes(uart_num, (const char*)data, 1);
     do {
-       printf("uart write wait : %02x\n", COMMAND_WAIT);
-       uart_write_bytes(uart_num, (const char*)data, 1);
        vTaskDelay( xDelay );
     } while(1);
 }
