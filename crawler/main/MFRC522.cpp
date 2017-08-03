@@ -218,14 +218,17 @@ byte MFRC522::read() {
     return *data;
 }
 
+const portTickType xDelay = 500 / portTICK_RATE_MS;
+
 extern "C" void MFRC522_main() {
     MFRC522 Conector;
     Conector.begin();
     printf("begin :\n");
     while(true)
     {
-        //Conector.readCardSerial();
+        Conector.readCardSerial();
         printf("readCardSerial :\n");
         Conector.wait();
+        vTaskDelay( xDelay );
     }    
 }
