@@ -1,5 +1,5 @@
+typedef unsigned char byte;
 class MFRC522 {
-
 public:
     MFRC522();
     void begin(void);
