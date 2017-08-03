@@ -222,7 +222,7 @@ extern "C" void MFRC522_main() {
     MFRC522 Conector;
     Conector.begin();
     printf("begin :\n");
-    //while(true)
+    while(true)
     {
         //Conector.readCardSerial();
         printf("readCardSerial :\n");
