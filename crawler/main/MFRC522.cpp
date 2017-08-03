@@ -49,6 +49,7 @@ void MFRC522::wait() {
  * Description：Returns true if detect card in MFRC522.
  */
 bool MFRC522::available() {
+    return false;
 }
 
 /**
@@ -176,4 +177,5 @@ void MFRC522::write(byte value) {
  * Return：Return the read value.
  */
 byte MFRC522::read() {
+    return 0;
 }
