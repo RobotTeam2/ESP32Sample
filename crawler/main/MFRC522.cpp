@@ -200,7 +200,7 @@ bool MFRC522::communicate(byte command, byte *sendData, byte sendDataLength, byt
  * Description：Write a byte data into MFRC522.
  */
 void MFRC522::write(byte value) {
-    int uart_num = UART_NUM_2;
+    uart_port_t uart_num = UART_NUM_2;
     uart_write_bytes(uart_num, (const char*)value, 1);
 }
 
