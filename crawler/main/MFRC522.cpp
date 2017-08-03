@@ -226,7 +226,7 @@ extern "C" void MFRC522_main() {
     printf("begin :\n");
     while(true)
     {
-        byte cardSerial = Conector.readCardSerial();
+        byte *cardSerial = Conector.readCardSerial();
         printf("readCardSerial cardSerial=<%s>\n",(char*)cardSerial);
         Conector.wait();
         vTaskDelay( xDelay );
