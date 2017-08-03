@@ -215,3 +215,13 @@ byte MFRC522::read() {
     uart_read_bytes(uart_num,data,1,ticks_to_wait);
     return *data;
 }
+
+extern "C" void MFRC522_main() {
+    MFRC522 Conector;
+    Conector.begin();
+    //while(true)
+    {
+        Conector.readCardSerial();
+        Conector.wait();
+    }    
+}
