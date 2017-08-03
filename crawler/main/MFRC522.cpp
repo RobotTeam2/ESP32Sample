@@ -1,4 +1,16 @@
-#include <Arduino.h>
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
+#include "freertos/FreeRTOS.h"
+#include "freertos/task.h"
+#include "esp_system.h"
+#include "nvs_flash.h"
+#include "driver/uart.h"
+#include "freertos/queue.h"
+#include "esp_log.h"
+#include "soc/uart_struct.h"
+
+
 #include "MFRC522.h"
 
 //------------------MFRC522 register ---------------
@@ -24,9 +36,7 @@ MFRC522::MFRC522() {
  * Description： Obtiene control del Serial para controlar MFRC522. 
  * Ademas, pone MFRC522 en modo de espera.
  */
-void MFRC522::begin(HardwareSerial *serial) {
-    _Serial = serial;
-    _Serial->begin(9600);
+void MFRC522::begin(void) {
     wait();
 }
 
@@ -34,14 +44,12 @@ void MFRC522::begin(HardwareSerial *serial) {
  * Description：Pone MFRC522 en modo espera.
  */
 void MFRC522::wait() {
-    _Serial->write(COMMAND_WAIT);
 }
 
 /**
  * Description：Returns true if detect card in MFRC522.
  */
 bool MFRC522::available() {
-    return (_Serial->available() > 0);
 }
 
 /**
@@ -162,7 +170,6 @@ bool MFRC522::communicate(byte command, byte *sendData, byte sendDataLength, byt
  * Description：Write a byte data into MFRC522.
  */
 void MFRC522::write(byte value) {
-    _Serial->write(value);
 }
 
 /*
@@ -170,5 +177,4 @@ void MFRC522::write(byte value) {
  * Return：Return the read value.
  */
 byte MFRC522::read() {
-    return _Serial->read();
 }
