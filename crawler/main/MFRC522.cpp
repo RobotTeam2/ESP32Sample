@@ -219,9 +219,11 @@ byte MFRC522::read() {
 extern "C" void MFRC522_main() {
     MFRC522 Conector;
     Conector.begin();
+    printf("begin :\n");
     //while(true)
     {
-        Conector.readCardSerial();
+        //Conector.readCardSerial();
+        printf("readCardSerial :\n");
         Conector.wait();
     }    
 }
