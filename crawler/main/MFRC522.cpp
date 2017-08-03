@@ -36,6 +36,25 @@ MFRC522::MFRC522() {
  * Ademas, pone MFRC522 en modo de espera.
  */
 void MFRC522::begin(void) {
+    int uart_num = UART_NUM_2;
+    uart_config_t uart_config = {
+       .baud_rate = 9600,
+       .data_bits = UART_DATA_8_BITS,
+       .parity = UART_PARITY_DISABLE,
+       .stop_bits = UART_STOP_BITS_1,
+       .flow_ctrl = UART_HW_FLOWCTRL_DISABLE,
+       .rx_flow_ctrl_thresh = 122,
+    };
+    //Set UART parameters
+    uart_param_config(uart_num, &uart_config);
+    //Set UART log level
+    esp_log_level_set(TAG, ESP_LOG_INFO);
+    //Set UART pins,(-1: default pin, no change.)
+    //For UART2, we can just use the default pins.
+    uart_set_pin(uart_num, NFC_UART_TXD, NFC_UART_RXD, NFC_UART_RTS, NFC_UART_CTS);
+    //Install UART driver, and get the queue.
+    esp_err_t installed =  uart_driver_install(uart_num, BUF_SIZE * 2, BUF_SIZE * 2, 10, &uart2_queue, 0);
+    printf("installed : %d\n", installed);
     wait();
 }
 
@@ -43,6 +62,7 @@ void MFRC522::begin(void) {
  * Description：Pone MFRC522 en modo espera.
  */
 void MFRC522::wait() {
+    write(COMMAND_WAIT);
 }
 
 /**
@@ -170,6 +190,8 @@ bool MFRC522::communicate(byte command, byte *sendData, byte sendDataLength, byt
  * Description：Write a byte data into MFRC522.
  */
 void MFRC522::write(byte value) {
+    int uart_num = UART_NUM_2;
+    uart_write_bytes(uart_num, (const char*)value, 1);
 }
 
 /*
@@ -177,5 +199,9 @@ void MFRC522::write(byte value) {
  * Return：Return the read value.
  */
 byte MFRC522::read() {
-    return 0;
+    int uart_num = UART_NUM_2;
+    uint8_t *data = (uint8_t *)malloc(1);
+    TickType_t ticks_to_wait = portTICK_RATE_MS;
+    uart_read_bytes(uart_num,data,1,ticks_to_wait);
+    return *data;
 }
